@@ -1,0 +1,19 @@
+Running a regression in Excel using its Data Analysis toolkit is not ideal compared to alternative options, but if required for 
+the task it is possible to 'automate' parts of it using macros in VBA. 
+
+You will need to use a macro-enabled Excel file and have the developer tab visable. You can access the VBA window directly in 
+Windows by pressing ALT+F11. You will want to create a regression with the following structure.
+---------------------------------------------------------------------------------------------------------------------------------
+Sub Regression()
+    Application.RUN "ATPVBAEN.XLAM!Regress", ActiveSheet.Range("<ENTER RANGE OF DEPENDENT VARIABLE>") _
+    , ActiveSheet.Range("<ENTER RANGE OF INDEPENDENT VARIABLE>"), False, True, , "", False, False, _
+    False, False, , False
+    ActiveSheet.Name = "<ENTER NAME TO ASSAIGN TAB>"
+    Worksheets("<ENTER TAB WHERE YOUR DATASET IS LOCATED>").Activate
+End Sub
+---------------------------------------------------------------------------------------------------------------------------------
+In order to get this code to work you will need to make sure that the Data Analysis for VBA toolkit is activated in your Excel 
+add-ins. You will want to run this code when looking at your dataset tab so it selects the correct fields from the correct tab.
+If you chose not to do this, then you will need to add in the last line of the subcode to the top so it switches to the dataset
+as the active tab. In the second line of the subcode, there exist one "True" element. This represents the first row of the
+dataset being associated with a title. The remaining items would have to be researched further to accomidate different needs.
